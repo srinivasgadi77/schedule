@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block body %}
+<div class='container'>
+<head>
+        <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
+<style>
+table {
+    font-family: 'Pontano Sans', sans-serif;
+    font-size: 14px;
+  }
+</style>
+<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js" integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE=" crossorigin="anonymous"></script>
+<script src="https://maxg-static-2.s3.amazonaws.com/static/home/js/main.js?Signature=c%2BpoFCKx6zvfXzJxhAhe47%2FLaYM%3D&amp;Expires=1542552171&amp;AWSAccessKeyId=AKIAJDHFIV6QUC3D7I6A"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<div class="row">
+        <div class="col-md-4">
+      <h2>Shift rota</h2>
+        </div>
+        <div class="col-md-4"  >
+            <div class="alert alert-success">
+                Date Range: <input type="text" name="daterange" value="select date range" />
+            </div>
+        </div>
+        <div class="col-md-4">
+                <div class="alert alert-success">
+                Predefined selection:
+                <div id="reportrange" >
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
+                    </div>
+                    </div>
+        </div>
+    </div>
+<hr>
+
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'right'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
+
+<!--customised time range-->        
+<script type="text/javascript">
+$(function() {          
+    var pre_start = moment().subtract(29, 'days');
+    var pre_end = moment();
+    function cb(pre_start, pre_end) {
+        $('#reportrange span').html(pre_start.format('MMMM D, YYYY') + ' - ' + pre_end.format('MMMM D, YYYY'));
+        console.log("A new date selection was made: " + pre_start.format('YYYY-MM-DD') + ' to ' + pre_end.format('YYYY-MM-DD'));
+        }
+            
+        $('#reportrange').daterangepicker({
+            startDate: pre_start,
+            endDate: pre_end,
+            ranges: {
+                       'Today': [moment(), moment()],
+                       'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                       'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                       'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                       'This Month': [moment().startOf('month'), moment().endOf('month')],
+                       'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    }
+            }, cb);
+            
+            cb(pre_start, pre_end);
+    });
+</script>
+</div>
+{% endblock  %}

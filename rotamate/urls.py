@@ -14,9 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import url
 from django.urls import path, include
+from rotamate import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('shiftrota/', include('shiftrota.urls'))
+    url('^$', views.login_redirect,name='login_redirect'),
+    url('admin/', admin.site.urls),
+    url(r'^shiftrota/', include('shiftrota.urls'))
 ]

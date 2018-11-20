@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block body %}
 {% if messages %}
     {% for message in messages %}
         <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
@@ -6,10 +8,17 @@
     {% endfor %}
 {% else %}
     {{order}}
+        <br><br>
         <form method="post" enctype="multipart/form-data">{% csrf_token %}
-            <label>Upload File</label>
-            <input type="file" name="file">
-            <p>Only Accepts CSV Files</p>
+            <table>
+                <tr>
+                    <td>Upload File:</td>
+                    <td><input type="file" name="file" pattern="^.+\.(xlsx|xls|csv)$" accept=".csv" class="required"/> </td>
+                </tr>    
+            </table>    
+            <br><br>
             <button type="save">Upload</button>
         </form>
+
 {% endif %}
+{%endblock%}
