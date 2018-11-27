@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+Plan here
+{{text}}
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+{% endblock  %}
+

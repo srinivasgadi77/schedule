@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import csv,io
 from django.contrib import messages
 from .models import Shiftrotainfo
 from django.core.exceptions import ValidationError
+from shiftrota.forms import HomeForm
 
 def home(request):
     return render(request,'shiftrota/home.html')
@@ -14,9 +15,7 @@ def upload_rota(request):
         'order':'Uploder only CSV format file and data must be name and followed by week shift details.'
     }
     if request.method == "GET":
-        print ("I am in GET12")    
         return render(request,template, prompt)
-    print ("I am in GET")
     csv_file = request.FILES['file']
 
     if not csv_file.name.endswith('.csv'):
@@ -38,3 +37,18 @@ def upload_rota(request):
         )
     print(csv_data)
     return render(request, 'shiftrota/preview.html', csv_data)
+
+def plan_new_v(request):
+    if request.method == "POST":
+        form = HomeForm(request.POST) 
+        print("form :%s" %form)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('plan_new_v')  
+    else:    
+        form = HomeForm()
+
+    args = {'form':form}    
+    return render(request,'shiftrota/plan.html',args)

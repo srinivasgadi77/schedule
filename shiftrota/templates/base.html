@@ -30,16 +30,17 @@ body {
           <ul class="nav navbar-nav navbar-right"> 
 
             <li><a href="/shiftrota/upload"><span class="glyphicon glyphicon-upload"></span> Upload </a></li>  
+            <li><a href="/shiftrota/plan/new"><span class="glyphicon glyphicon-upload"></span> Plan </a></li>  
             <li><a href=""><span class="glyphicon glyphicon-edit"></span> Update individual</a></li>
             <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           </ul>
         </div>
       </nav>
-      
-                      <div class="container">
-                {%block body%}
-                <p> base body</p>
-                {% endblock  %}
-        </div>
+
+      <div class="container">
+          {%block body%}
+            <p> base body</p>
+          {% endblock  %}
+      </div>
 </body>
 </html>
