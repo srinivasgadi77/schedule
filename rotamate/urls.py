@@ -21,5 +21,7 @@ from rotamate import views
 urlpatterns = [
     url('^$', views.login_redirect,name='login_redirect'),
     url('admin/', admin.site.urls),
-    url(r'^shiftrota/', include('shiftrota.urls'))
+    url(r'^shiftrota/', include('shiftrota.urls')),
+    url(r'^admin/jsi18n', views.i18n_javascript),
+
 ]

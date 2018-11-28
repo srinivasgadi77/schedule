@@ -1,5 +1,6 @@
 from django import forms
 from shiftrota.models import Shiftrotainfo
+from bootstrap_datepicker_plus import DatePickerInput
 
 AVAILABLE_SHIFTS=[
     ('shift1','Morning'),
@@ -9,8 +10,12 @@ AVAILABLE_SHIFTS=[
 ]
 
 class HomeForm(forms.ModelForm):
-    shift = forms.ChoiceField(label='shift',choices=AVAILABLE_SHIFTS)
+    Shift = forms.ChoiceField(label='Shift',choices=AVAILABLE_SHIFTS)
+    #Date = forms.DateField(widget = widgets.AdminDateWidget)
 
     class Meta:
         model = Shiftrotainfo
-        fields = ('first_name','shift','date') 
+        fields = ('Name','Shift','Date') 
+        widgets = {
+            'Date': DatePickerInput(format='%d/%m/%Y'), # default date-format %m/%d/%Y will be used
+        }

@@ -1,12 +1,21 @@
 {% extends "base.html" %}
 {% block body %}
-Plan here
-{{text}}
-<form method="POST" class="post-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-</form>
+{{ form.media }}
 
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-success">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}  
+                    {{ form.as_p }}
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock  %}
 

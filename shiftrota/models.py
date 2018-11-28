@@ -9,9 +9,10 @@ AVAILABLE_SHIFTS=[
 ]
 
 class Shiftrotainfo(models.Model):
-    first_name=models.CharField(max_length=50)
-    shift = models.CharField(max_length=50,choices=AVAILABLE_SHIFTS)
-    date = models.DateField(auto_now=False)
+    Name=models.CharField(max_length=50)
+    Shift = models.CharField(max_length=50,choices=AVAILABLE_SHIFTS)
+    Date = models.DateField(blank=False)
 
+    #whcih display the info on admin form
     def __str__(self):
-        return ('%s is in %s') %(self.first_name,self.shift)
+        return ('%s is in %s on %s') %(self.Name,self.Shift,self.Date)
